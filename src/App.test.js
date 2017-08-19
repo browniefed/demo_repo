@@ -1,8 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import React from "react";
+import App from "./App";
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
+import { shallow } from "enzyme";
+import renderer from "react-test-renderer";
+
+it("renders correctly", () => {
+  const wrapper = shallow(<App />);
+
+  const commentComp = wrapper.find("Comment");
+  
+  commentComp.prop("onCommentEdit")()
+
+  expect(commentComp.prop("editing").toBeTruthy()
+
+});
+
+it("renders correctly", () => {
+  const tree = renderer.create(<App />).toJSON();
+  expect(tree).toMatchSnapshot();
 });
