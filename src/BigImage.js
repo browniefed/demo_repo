@@ -1,71 +1,37 @@
 import React, { Component } from "react";
 
-const wrapImage = RenderComponent => {
+const wrapWithCounter = RenderComponent => {
   class WrappedRenderComponent extends Component {
     state = {
-      loading: true,
-      error: true,
-      data: {},
+      counter: 0,
     };
 
-    mount = false;
-
     componentDidMount() {
-      this.mount = true;
-
-      return fetch("https://unsplash.it/list").then(res => res.json()).then(
-        pictures => {
-          if (!this.mount) return;
-
-          this.setState({
-            loading: false,
-            data: pictures[this.props.id],
-          });
-        },
-        e => {
-          if (!this.mount) return;
-
-          this.setState({
-            loading: false,
-            error: "Failed to load data " + e.message,
-          });
-        },
-      );
+      this.interval = setInterval(() => {
+        this.setState({
+          counter: this.state.counter + 1,
+        });
+      }, 1000);
     }
-
     componentWillUnmount() {
-      this.mount = false;
+      clearInterval(this.interval);
     }
 
     render() {
-      return (
-        <RenderComponent
-          {...this.props}
-          {...this.state}
-        />
-      );
+      return <RenderComponent {...this.state} />;
     }
   }
   return WrappedRenderComponent;
 };
 
-class BigImage extends Component {
-  componentDidMount() {
-    
-  }
-  
-  render() {
-    if (this.props.loading) return <div>Loading Big Image</div>;
+const Counter = ({ counter }) => {
+  return (
+    <div>
+      {counter}
+    </div>
+  );
+};
 
-    return (
-      <div>
-        <img src={`https://unsplash.it/800/800?image=${this.props.data.id}`} />
-        <button onClick={this.props.onClear}>Clear</button>
-      </div>
-    );
-  }
-}
-
-const NewWrappedComponenet = wrapImage(BigImage);
+const NewWrappedComponenet = wrapWithCounter(Counter);
 
 export default NewWrappedComponenet;
