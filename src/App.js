@@ -8,33 +8,33 @@ import "./App.css";
 class Unmounter extends Component {
   state = {
     counter: 0,
-  }
-  
+  };
+
   componentDidMount() {
     this.interval = setInterval(() => {
-      this.setState({ counter: this.state.counter + 1})
-    }, 1000)
-  }
-  
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      counter: 0,
-    })
+      this.setState({ counter: this.state.counter + 1 });
+    }, 1000);
   }
 
-  componentWillUpdate() {
-    
+  componentWillReceiveProps() {
+    this.setState({
+      counter: 0,
+    });
   }
-  
+
   componentWillUnmount() {
     clearInterval(this.interval);
   }
-  
+
   render() {
-    console.count("re-renders")
+    console.count("re-renders");
     console.log(this.state.counter);
 
-    return <div>{this.state.counter}</div>;
+    return (
+      <div>
+        {this.state.counter}
+      </div>
+    );
   }
 }
 
@@ -53,6 +53,11 @@ class App extends Component {
   componentWillUpdate(nextProps, nextState) {}
   componentDidUpdate(prevProps, prevState) {}
 
+  updateValue = () => {
+    this.setState({
+      value: "",
+    });
+  };
   render() {
     return (
       <div className="App">
@@ -63,7 +68,7 @@ class App extends Component {
             width: this.state.value ? "300px" : "auto",
           }}
         />
-        {!this.state.value ? null : <Unmounter />}
+        {!this.state.value ? null : <Unmounter killApp={this.updateValue} />}
       </div>
     );
   }
