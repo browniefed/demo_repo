@@ -1,12 +1,32 @@
 .App {
+  padding: 30px;
   height: 100vh;
+}
+
+.input {
+  padding: 5px 15px;
+  font-size: 16px;
+}
+
+.button {
+  margin-left: 20px;
+  font-size: 16px;
+  padding: 7px 15px;
+}
+
+.movie_grid {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
-.sidebar {
-  width: 300px
+.movie {
+  width: 20%;
 }
 
-.content {
-  flex: 1;
+
+.detail {
+  width: 500px;
+  margin: 30px auto;
 }
