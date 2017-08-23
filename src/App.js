@@ -80,6 +80,7 @@ class App extends Component {
             Search
           </button>
         </div>
+        {this.state.error && <div>An error ocurred while trying to load movies.</div>}
 
         {hasMoviesNoneSelected &&
           <MovieGrid movies={this.state.movies} onMovieSelect={this.handleMovieSelect} />}
