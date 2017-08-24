@@ -15,3 +15,4 @@ Class 2
  - class3
  - class3PartB
  - lab3
+ - lab3final
