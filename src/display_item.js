@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import shallowEqual from "shallowequal";
+
 class DisplayItem extends Component {
   static propTypes = {
     productName: PropTypes.string.isRequired,
@@ -9,12 +11,7 @@ class DisplayItem extends Component {
     children: PropTypes.node,
   }
   shouldComponentUpdate(nextProps) {
-    return (
-      nextProps.productName !== this.props.productName &&
-      nextProps.price !== this.props.price &&
-      nextProps.description !== this.props.description &&
-      nextProps.children !== this.props.children
-    )
+    return shallowEqual(this.props, nextProps);
   }
   
   render() {
