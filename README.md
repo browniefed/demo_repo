@@ -16,3 +16,9 @@ Class 2
  - class3PartB
  - lab3
  - lab3final
+
+ Class 4
+ - class4
+ - class4PartB
+ - class4PartC - the bad stuff
+ - class4PartD
