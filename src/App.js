@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 
 import Admin from "./admin";
+import User from "./user";
 
 class App extends Component {
   state = {
@@ -9,7 +10,6 @@ class App extends Component {
   };
   handleAddItem = item => {
     this.setState(state => {
-      state.counter == 0;
       return {
         list: [...state.list, item],
       };
@@ -19,10 +19,17 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Admin 
-          list={this.state.list}
-          onAddItem={this.handleAddItem}
-        />
+        <div className="half">
+          <User
+            list={this.state.list}
+          />
+        </div>
+        <div className="half">
+          <Admin 
+            list={this.state.list}
+            onAddItem={this.handleAddItem}
+          />
+        </div>
       </div>
     );
   }
