@@ -10,9 +10,6 @@ class DisplayItem extends Component {
     description: PropTypes.string.isRequired,
     children: PropTypes.node,
   }
-  shouldComponentUpdate(nextProps) {
-    return shallowEqual(this.props, nextProps);
-  }
   
   render() {
     const { productName, price, description, children } = this.props;

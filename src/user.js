@@ -17,10 +17,10 @@ class User extends Component {
   state = {
     cart: [],
   };
-  handleAddToCart = item => {
+  handleAddToCart = id => {
     this.setState(state => {
       return {
-        cart: [...state.cart, item],
+        cart: [...state.cart, id],
       };
     });
   };
@@ -34,6 +34,15 @@ class User extends Component {
 
     const cartHasItems = !!this.state.cart.length;
 
+    debugger;
+    const cart = this.state.cart.map((id) => {
+      return this.props.list.find((item) => {
+        return item.id === id;
+      })
+    })
+
+    debugger;
+
     return (
       <div>
         <List>
@@ -42,7 +51,7 @@ class User extends Component {
               <DisplayItem key={item.id}
                 {...item}
               >
-                <button onClick={() => this.handleAddToCart(item)}>Add to Cart</button>
+                <button onClick={() => this.handleAddToCart(item.id)}>Add to Cart</button>
               </DisplayItem>
             );
           })}
@@ -51,13 +60,13 @@ class User extends Component {
         {cartHasItems && <h2>Items in Cart</h2>}
         {!cartHasItems && <h2>Add items to your cart</h2>}
         <List>
-          {this.state.cart.map(item => {
+          {cart.map(item => {
             return <DisplayItem {...item} />;
           })}
         </List>
         {cartHasItems && <div>
           <h1>
-            Subtotal: ${getTotalPrice(this.state.cart)}
+            Subtotal: ${getTotalPrice(cart)}
           </h1>
           <button onClick={this.handleCheckout}>Checkout</button>
         </div>}

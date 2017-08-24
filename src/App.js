@@ -26,10 +26,26 @@ class App extends Component {
     Perf.start();
     this.setState(state => {
       return {
-        list: [{...item, id: Date.now() }, ...state.list],
+        list: [{...item, id: Date.now()}, ...state.list],
       };
     });
   };
+
+  handleUpdateItem = item => {
+    
+    this.setState((state) => {
+      
+      const list = state.list.map((listItem) => {
+        if (item.id !== listItem.id) return listItem;
+        return item;
+      });
+
+      return {
+        list
+      }
+    });
+
+  }
 
   render() {
     return (
@@ -43,6 +59,7 @@ class App extends Component {
           <Admin 
             list={this.state.list}
             onAddItem={this.handleAddItem}
+            onUpdateItem={this.handleUpdateItem}
           />
         </div>
       </div>

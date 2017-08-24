@@ -5,6 +5,7 @@ import DisplayItem from "./display_item";
 import List from "./list";
 
 const EMPTY_PRODUCT = {
+  id: null,
   productName: "",
   description: "",
   price: 0,
@@ -34,18 +35,27 @@ class AdminContainer extends Component {
     });
   };
 
-  handleAddItem = e => {
+  handleUpsertItem = e => {
     e.preventDefault();
 
-    this.props.onAddItem(this.state);
+    if (this.state.id) {
+      this.props.onUpdateItem(this.state);
+    } else {
+      this.props.onAddItem(this.state);
+    }
+
     this.setState(EMPTY_PRODUCT);
   };
+
+  handleEdit = (item) => {
+    this.setState(item);
+  }
   render() {
     return (
       <div>
         <h1>Admin</h1>
         <div>
-          <form onSubmit={this.handleAddItem}>
+          <form onSubmit={this.handleUpsertItem}>
             <div className="input_row">
               <label>Product Name: </label>
               <input
@@ -78,12 +88,18 @@ class AdminContainer extends Component {
                 />
               </div>
             </div>
-            <button>Add</button>
+            <button>{
+              this.state.id ? "Save" : "Add"  
+            }</button>
           </form>
         </div>
         <List>
           {this.props.list.map(item => {
-            return <DisplayItem {...item} />;
+            return (
+              <DisplayItem {...item}>
+                <button onClick={() => this.handleEdit(item)}>Edit</button>
+              </DisplayItem>
+            )
           })}
         </List>
       </div>
