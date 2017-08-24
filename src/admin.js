@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 import DisplayItem from "./display_item";
 import List from "./list";
@@ -10,10 +11,26 @@ const EMPTY_PRODUCT = {
 };
 
 class AdminContainer extends Component {
+  static propTypes = {
+    list: PropTypes.arrayOf(
+      PropTypes.shape({
+        productName: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        description: PropTypes.string.isRequired,
+      }),
+    ).isRequired,
+    onAddItem: PropTypes.func.isRequired,
+  };
   state = EMPTY_PRODUCT;
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value,
+    });
+  };
+
+  handleNumberChange = e => {
+    this.setState({
+      [e.target.name]: parseInt(e.target.value, 10),
     });
   };
 
@@ -46,7 +63,7 @@ class AdminContainer extends Component {
                 required
                 name="price"
                 value={this.state.price}
-                onChange={this.handleChange}
+                onChange={this.handleNumberChange}
               />
             </div>
             <div className="input_row">

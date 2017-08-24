@@ -3,15 +3,30 @@ import "./App.css";
 
 import Admin from "./admin";
 import User from "./user";
+import Perf from "react-addons-perf";
+
+// Immutability (no mutations)
+// Pure functions
+// shouldComponentUpdate
+
+// Objects within list
+
 
 class App extends Component {
   state = {
     list: [],
   };
+  
+  componentDidUpdate(prevProps, prevState) {
+    Perf.stop();
+    Perf.printWasted();
+  }
+  
   handleAddItem = item => {
+    Perf.start();
     this.setState(state => {
       return {
-        list: [...state.list, item],
+        list: [{...item, id: Date.now() }, ...state.list],
       };
     });
   };
