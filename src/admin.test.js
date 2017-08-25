@@ -6,7 +6,8 @@ import renderer from "react-test-renderer";
 
 
 describe("Admin", () => {
-  it("renders correctly", () => {
+
+  it("adds product correctyl", () => {
 
     const addItemSpy = jest.fn();
     const preventDefault = jest.fn();
@@ -47,5 +48,51 @@ describe("Admin", () => {
       price: 10,
       description: "Description"
     });
+
   });
+
+  it("updates product correctly", () => {
+
+    const updateItemSpy = jest.fn();
+    const preventDefault = jest.fn();
+
+    const wrapper = shallow(
+      <Admin
+        list={[
+          {
+            id: 123,
+            productName: "Test",
+            price: 10,
+            description: "Description"
+          }
+        ]}
+        onUpdateItem={updateItemSpy}
+      />
+    );
+
+
+    wrapper.find("button").at(1).simulate("click");
+
+
+    wrapper.find("textarea").simulate("change", {
+      target: {
+        value: "UPDATE",
+      }
+    });
+
+    wrapper.find("form").simulate("submit", {
+      preventDefault
+    });
+
+    expect(preventDefault).toHaveBeenCalled();
+    expect(updateItemSpy).toHaveBeenCalled();
+    expect(updateItemSpy).toHaveBeenCalledWith({
+      id: 123,
+      productName: "Test",
+      price: 10,
+      description: "UPDATE"
+    });
+
+    expect(wrapper.state("id")).toEqual(null);
+  })
 })
