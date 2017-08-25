@@ -6,7 +6,7 @@ import List from "./list";
 
 const EMPTY_PRODUCT = {
   id: null,
-  productName: "",
+  name: "",
   description: "",
   price: 0,
 };
@@ -26,15 +26,15 @@ class AdminContainer extends Component {
     onAddItem: PropTypes.func.isRequired,
   };
   state = EMPTY_PRODUCT;
-  handleChange = e => {
+  handleChange = (e, name) => {
     this.setState({
-      [e.target.name]: e.target.value,
+      [name]: e.target.value,
     });
   };
 
-  handleNumberChange = e => {
+  handleNumberChange = (e, name) => {
     this.setState({
-      [e.target.name]: parseInt(e.target.value, 10),
+      [name]: parseInt(e.target.value, 10),
     });
   };
 
@@ -64,7 +64,7 @@ class AdminContainer extends Component {
               <input
                 name="productName"
                 value={this.state.productName}
-                onChange={this.handleChange}
+                onChange={(e) => this.handleChange(e, "productName")}
                 required
               />
             </div>
@@ -76,7 +76,7 @@ class AdminContainer extends Component {
                 required
                 name="price"
                 value={this.state.price}
-                onChange={this.handleNumberChange}
+                onChange={(e) => this.handleNumberChange(e, "price")}
               />
             </div>
             <div className="input_row">
@@ -85,7 +85,7 @@ class AdminContainer extends Component {
                 <textarea
                   name="description"
                   value={this.state.description}
-                  onChange={this.handleChange}
+                  onChange={(e) => this.handleChange(e, "description")}
                   required
                   rows="5"
                 />

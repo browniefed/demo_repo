@@ -20,21 +20,18 @@ describe("Admin", () => {
     wrapper.find("input").at(0).simulate("change", {
       target: {
         value: "Test",
-        name: "productName"
       }
     });
 
     wrapper.find("input").at(1).simulate("change", {
       target: {
         value: 10,
-        name: "price"
       }
     });
 
     wrapper.find("textarea").simulate("change", {
       target: {
         value: "Description",
-        name: "description"
       }
     });
 
