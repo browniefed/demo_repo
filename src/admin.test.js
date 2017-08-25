@@ -9,6 +9,7 @@ describe("Admin", () => {
   it("renders correctly", () => {
 
     const addItemSpy = jest.fn();
+    const preventDefault = jest.fn();
 
     const wrapper = shallow(
       <Admin
@@ -18,7 +19,7 @@ describe("Admin", () => {
 
     wrapper.find("input").at(0).simulate("change", {
       target: {
-        value: "The Value We Want To Set For Product Name",
+        value: "Test",
         name: "productName"
       }
     });
@@ -32,13 +33,22 @@ describe("Admin", () => {
 
     wrapper.find("textarea").simulate("change", {
       target: {
-        value: "My Description",
+        value: "Description",
         name: "description"
       }
     });
 
+    wrapper.find("form").simulate("submit", {
+      preventDefault
+    });
 
-    
-
+    expect(preventDefault).toHaveBeenCalled();
+    expect(addItemSpy).toHaveBeenCalled();
+    expect(addItemSpy).toHaveBeenCalledWith({
+      id: null,
+      productName: "Test",
+      price: 10,
+      description: "Description"
+    });
   });
 })
