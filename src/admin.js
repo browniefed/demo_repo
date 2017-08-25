@@ -6,7 +6,7 @@ import List from "./list";
 
 const EMPTY_PRODUCT = {
   id: null,
-  name: "",
+  productName: "",
   description: "",
   price: 0,
 };
