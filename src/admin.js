@@ -12,6 +12,9 @@ const EMPTY_PRODUCT = {
 };
 
 class AdminContainer extends Component {
+  static defaultProps = {
+    list: []
+  }
   static propTypes = {
     list: PropTypes.arrayOf(
       PropTypes.shape({
