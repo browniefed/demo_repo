@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders data 1`] = `
+<div
+  className="display_item"
+>
+  <h3>
+    Test
+     - $
+    10
+  </h3>
+  <p>
+    Description
+  </p>
+</div>
+`;
+
+exports[`renders loading 1`] = `
+<div>
+  Loading...
+</div>
+`;

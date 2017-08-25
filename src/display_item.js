@@ -12,7 +12,10 @@ class DisplayItem extends Component {
   }
   
   render() {
-    const { productName, price, description, children } = this.props;
+    const { loading, productName, price, description, children } = this.props;
+
+    if (loading) return <div>Loading...</div>
+
     return (
       <div className="display_item">
         <h3>
