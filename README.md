@@ -22,3 +22,9 @@ Class 2
  - class4PartB
  - class4PartC - the bad stuff
  - class4PartD
+
+ Class 5 
+ - class5 - base
+ - class5PartB - add item 
+ - class5PartC - update item
+ - class5PartD - snapshots
