@@ -23,16 +23,12 @@ class User extends Component {
 
   render() {
     const { match } = this.props;
-    const userId = match.params.userId;
     const url = match.url;
 
     return (
       <div>
 
         User {this.state.counter}
-        <Link to={`${url}/photos`}>Photos</Link>
-        <Link to={`${url}/comments`}>Comments</Link>
-
         
         <Switch>
           <Route path={`${this.props.match.path}/photos`} render={() => <div>Hey look at all my photos</div>}/>
