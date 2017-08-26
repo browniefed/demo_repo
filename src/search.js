@@ -3,27 +3,9 @@ import qs from "query-string";
 
 
 class Search extends Component {
-  state = {
-    value: qs.parse(this.props.location.search).value || "",
-  };
-  
   handleChange = e => {
-    this.setState({
-      value: e.target.value,
-    });
+    this.props.history.replace(`/search?${qs.stringify({ value: e.target.value })}`);
   };
-  handleKeyUp = (e) => {
-    if (e.key === "Enter") {
-      this.props.history.push(`/search?value=${this.state.value}`)
-    }
-  }
-  componentWillReceiveProps(nextProps) {
-    const value = qs.parse(nextProps.location.search).value || "";
-    this.setState({
-      value
-    })
-  }
-  
   render() {
     const query = qs.parse(this.props.location.search);
 
@@ -31,10 +13,10 @@ class Search extends Component {
       <div>
         Search
         <input 
-          value={this.state.value} 
+          value={query.value || "" } 
           onChange={this.handleChange} 
-          onKeyUp={this.handleKeyUp}
         />
+
       </div>
     );
   }
