@@ -12,7 +12,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        
+        <Nav />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/trending" component={Trending} />
+          <Route path="/image/:imageId" component={Image} />
+        </Switch>
       </div>
     );
   }
