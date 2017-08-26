@@ -17,7 +17,7 @@ class App extends Component {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/about" component={About} />
-            <Route path="/profile/:userId" exact component={User} />
+            <Route path="/profile/:userId" component={User} />
             <Redirect from="/home" to="/" />
             <Route component={NoMatch} />
           </Switch>

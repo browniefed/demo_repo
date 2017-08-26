@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Prompt } from "react-router-dom";
+import { Link, Switch, Route, Prompt } from "react-router-dom";
 
 class User extends Component {
   state = {
@@ -15,17 +15,29 @@ class User extends Component {
           dirty: true,
         };
       });
-    }, 3000);
+    }, 500);
   }
   componentWillUnmount() {
     clearInterval(this.interval);
   }
 
   render() {
+    const { match } = this.props;
+    const userId = match.params.userId;
+    const url = match.url;
+
     return (
       <div>
-        <Prompt when={this.state.dirty} message="Hey you're going to kill the count." />
+
         User {this.state.counter}
+        <Link to={`${url}/photos`}>Photos</Link>
+        <Link to={`${url}/comments`}>Comments</Link>
+
+        
+        <Switch>
+          <Route path={`${this.props.match.path}/photos`} render={() => <div>Hey look at all my photos</div>}/>
+          <Route path={`${this.props.match.path}/comments`} render={() => <div>Comment on my wall</div>}/>
+        </Switch>
       </div>
     );
   }
