@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Home from "./home";
 import About from "./about"
 import User from "./user";
@@ -17,7 +17,8 @@ class App extends Component {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/about" component={About} />
-            <Route path="/:userId" exact component={User} />
+            <Route path="/profile/:userId" exact component={User} />
+            <Redirect from="/home" to="/" />
             <Route component={NoMatch} />
           </Switch>
         </div>
