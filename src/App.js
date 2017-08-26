@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Home from "./home";
 import About from "./about"
 import User from "./user";
+import Search from "./search";
 import NoMatch from "./nomatch";
 
 import MasterNav from "./nav";
@@ -18,6 +19,7 @@ class App extends Component {
             <Route path="/" exact component={Home} />
             <Route path="/about" component={About} />
             <Route path="/profile/:userId" component={User} />
+            <Route path="/search" component={Search} />
             <Redirect from="/home" to="/" />
             <Route component={NoMatch} />
           </Switch>

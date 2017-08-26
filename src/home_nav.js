@@ -8,7 +8,7 @@ class HomeNav extends Component {
       <div>
         <Link to="/home">Home</Link>
         <Link to="/about">About</Link>
-        <Link to="/profile/1">My Profile</Link>
+        <Link to="/search">Search</Link>
       </div>
     );
   }
