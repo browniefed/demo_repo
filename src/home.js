@@ -1,33 +1,57 @@
 import React, { Component } from "react";
+import qs from "query-string";
 
+import Grid from "./grid";
 import { search } from "./api";
 
 class HomeContainer extends Component {
   state = {
     value: "",
-    gifs: [],
+    images: [],
   };
-  handleSearch = e => {
-    if (!e.key === "Enter") return;
-    search(this.state.value).then(gifs => {
+
+  componentDidMount() {
+    const query = qs.parse(this.props.location.search);
+
+    if (query.search) {
+      this.search(query.search);
+    }
+  }
+  handleTypeChange = e => {
+    const query = qs.stringify({
+      search: e.target.value,
+    });
+
+    this.props.history.replace(`/?${query}`);
+  };
+  search = value => {
+    search(value).then(gifs => {
       this.setState({
-        gifs: gifs.data,
+        images: gifs.data,
       });
     });
   };
+
+  handleSearch = e => {
+    if (e.key !== "Enter") return;
+    const query = qs.parse(this.props.location.search);
+    this.search(query.search);
+  };
+
   render() {
+    const query = qs.parse(this.props.location.search);
+
     return (
       <div>
         <input
-          value={this.state.value}
-          onChange={e => this.setState({ value: e.target.value })}
+          placeholder="Search For GIFS"
+          className="input is-primary is-large"
+          value={query.search || ""}
+          onChange={this.handleTypeChange}
           onKeyUp={this.handleSearch}
         />
         <div>
-          {this.state.gifs.map(gif => {
-            const imgSrc = gif.images.downsized_medium;
-            return <img key={gif.id} src={imgSrc.url} />;
-          })}
+          <Grid images={this.state.images} />
         </div>
       </div>
     );
