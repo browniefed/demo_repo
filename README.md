@@ -28,3 +28,9 @@ Class 2
  - class5PartB - add item 
  - class5PartC - update item
  - class5PartD - snapshots
+
+Class 6
+- gifs
+- gifsFinal
+
+Class 7
