@@ -6,6 +6,7 @@ import Grid from "./grid";
 import { connect } from "react-redux";
 
 import { searchImages } from "./actions/images";
+import { clearPage } from "./actions/page";
 
 class HomeContainer extends Component {
   componentDidMount() {
@@ -23,7 +24,7 @@ class HomeContainer extends Component {
     this.props.history.replace(`/?${query}`);
   };
   search = value => {
-    this.props.searchImages(value);
+    this.props.searchImages(value, "home");
   };
 
   handleSearch = e => {
@@ -31,6 +32,10 @@ class HomeContainer extends Component {
     const query = qs.parse(this.props.location.search);
     this.search(query.search);
   };
+
+  componentWillUnmount() {
+    this.props.clearPage("home");
+  }
 
   render() {
     const query = qs.parse(this.props.location.search);
@@ -52,16 +57,23 @@ class HomeContainer extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const getImagesFromIds = (ids = [], images) => {
+  return ids.map(id => {
+    return images[id];
+  });
+};
+
+const mapStateToProps = state => {
+  const images = getImagesFromIds(state.page.home, state.images);
+
   return {
-    images: state.images
-  }
-}
+    images
+  };
+};
 
 const mapDispatchProps = {
-  searchImages
-}
-
-
+  searchImages,
+  clearPage,
+};
 
 export default connect(mapStateToProps, mapDispatchProps)(HomeContainer);

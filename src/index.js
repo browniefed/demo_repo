@@ -8,9 +8,11 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 import imageReducer from "./reducers/images";
+import pageReducer from "./reducers/page";
 
 const rootReducer = combineReducers({
   images: imageReducer,
+  page: pageReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
