@@ -33,4 +33,6 @@ Class 2
 - gifs
 - gifsFinal
 
-Class 7
+
+
+- gifsFinalRedux
