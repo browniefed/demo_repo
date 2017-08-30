@@ -36,3 +36,5 @@ Class 2
 
 
 - gifsFinalRedux
+
+--- Convert trending page to use Redux
