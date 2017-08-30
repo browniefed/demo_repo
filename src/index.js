@@ -4,10 +4,22 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 
+import { createStore, combineReducers } from "redux";
+import { Provider } from "react-redux";
+import imageReducer from "./reducers/images";
+
+const rootReducer = combineReducers({
+  images: imageReducer,
+});
+
+const store = createStore(rootReducer)
+
 const appWithBrowserRouter = (
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
 );
 
 ReactDOM.render(appWithBrowserRouter, document.getElementById("root"));

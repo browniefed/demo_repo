@@ -4,12 +4,11 @@ import qs from "query-string";
 import Grid from "./grid";
 import { search } from "./api";
 
-class HomeContainer extends Component {
-  state = {
-    value: "",
-    images: [],
-  };
+import { connect } from "react-redux";
 
+import { addImages } from "./actions/images";
+
+class HomeContainer extends Component {
   componentDidMount() {
     const query = qs.parse(this.props.location.search);
 
@@ -26,9 +25,7 @@ class HomeContainer extends Component {
   };
   search = value => {
     search(value).then(gifs => {
-      this.setState({
-        images: gifs.data,
-      });
+      this.props.addImages(gifs.data);
     });
   };
 
@@ -51,11 +48,23 @@ class HomeContainer extends Component {
           onKeyUp={this.handleSearch}
         />
         <div>
-          <Grid images={this.state.images} />
+          <Grid images={this.props.images} />
         </div>
       </div>
     );
   }
 }
 
-export default HomeContainer;
+const mapStateToProps = (state) => {
+  return {
+    images: state.images
+  }
+}
+
+const mapDispatchProps = {
+  addImages
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchProps)(HomeContainer);
