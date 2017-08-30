@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import qs from "query-string";
 
 import Grid from "./grid";
-import { search } from "./api";
 
 import { connect } from "react-redux";
 
-import { addImages } from "./actions/images";
+import { searchImages } from "./actions/images";
 
 class HomeContainer extends Component {
   componentDidMount() {
@@ -24,9 +23,7 @@ class HomeContainer extends Component {
     this.props.history.replace(`/?${query}`);
   };
   search = value => {
-    search(value).then(gifs => {
-      this.props.addImages(gifs.data);
-    });
+    this.props.searchImages(value);
   };
 
   handleSearch = e => {
@@ -62,7 +59,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchProps = {
-  addImages
+  searchImages
 }
 
 

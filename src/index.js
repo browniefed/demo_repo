@@ -4,7 +4,8 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 import imageReducer from "./reducers/images";
 
@@ -12,7 +13,7 @@ const rootReducer = combineReducers({
   images: imageReducer,
 });
 
-const store = createStore(rootReducer)
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 const appWithBrowserRouter = (
   <Provider store={store}>
